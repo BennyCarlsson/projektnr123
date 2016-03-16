@@ -10,7 +10,6 @@ var Post = React.createClass({
 	componentDidMount: function(){
 		var url = window.location.href;
 		var key = url.split('key=')[1].split('&')[0];
-		console.log(key);
         var ref = new Firebase(C.FIREBASE+"/"+C.FIREBASE_ACCEPTED+"/"+key);
         ref.once("value", function(snap){
 			this.setState({data: snap.val()});
@@ -22,6 +21,7 @@ var Post = React.createClass({
 					<Link to="/">Home</Link>
 					<h1>Post</h1>
 					<p>{this.state.data.text}</p>
+					<p>{this.state.data.university}</p>
 					{this.state.data.alias === "" ? "":<p>-{this.state.data.alias}</p>}
 				</div>
         );

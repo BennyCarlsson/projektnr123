@@ -45,6 +45,7 @@ var ConfessionsList = React.createClass({
         var confessions = this.props.confessions.map(function(obj,index){
             return <div key={index} className="confessionDiv">
                         <p> {obj.text}</p>
+						<p>{obj.university}</p>
                         {obj.alias === "" ? "":<p>-{obj.alias}</p>}
 						<button className="declineButton" onClick={decline.bind(this,obj)}>Neka</button>
 						<button className="acceptButton" onClick={accept.bind(this,obj)}>Acceptera</button>
@@ -67,7 +68,8 @@ function accept(obj){
 			alias: obj.alias,
 			status: C.ACCEPTED,
 			upvotes: 0,
-			downvotes: 0
+			downvotes: 0,
+			university: obj.university
 		});
 		removeFromPending(obj.key);
 }
@@ -81,7 +83,8 @@ function decline(obj){
 		alias: obj.alias,
 		status: C.DENIED,
 		upvotes: 0,
-		downvotes: 0
+		downvotes: 0,
+		university: obj.university
 	});
 	removeFromPending(obj.key);
 }
