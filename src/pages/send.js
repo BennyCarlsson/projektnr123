@@ -1,6 +1,7 @@
 var React = require('react'),
 	ReactDOM = require('react-dom'),
 	C = require('../constants'),
+	Universities = require("../universities"),
 	Link = require('react-router').Link,
 	Button = require('react-bootstrap').Button,
 	Input = require('react-bootstrap').Input;
@@ -41,25 +42,15 @@ var SendInForm = React.createClass({
 		this.setState({value: ""});
 	},
 	render: function(){
+		var universities = Universities.universities.map(function(university){
+			return <option value={university}>{university}</option>;
+
+		});
 		return(
 			<form id="sendInForm" onSubmit={this.handleSubmit}>
 				<Input type="select" placeholder="Välj universitet.." name="university" value={this.state.university}  onChange={this.handleChange}>
 					<option value="" active>Välj universitet..</option>
-					<option value="Chalmers tekniska högskola">Chalmers tekniska högskola</option>
-					<option value="Göteborgs universitet">Göteborgs universitet</option>
-					<option value="Karlstads universitet">Karlstads universitet</option>
-					<option value="Karolinska institutet">Karolinska institutet</option>
-					<option value="Kungliga Tekniska högskolan">Kungliga Tekniska högskolan</option>
-					<option value="Linköpings universitet">Linköpings universitet</option>
-					<option value="Linnéuniversitetet">Linnéuniversitetet</option>
-					<option value="Luleå tekniska universitet">Luleå tekniska universitet</option>
-					<option value="Lunds universitet">Lunds universitet</option>
-					<option value="Mittuniversitetet">Mittuniversitetet</option>
-					<option value="Stockholms universitet">Stockholms universitet</option>
-					<option value="Sveriges lantbruksuniversitet">Sveriges lantbruksuniversitet</option>
-					<option value="Umeå universitet">Umeå universitet</option>
-					<option value="Uppsala universitet">Uppsala universitet</option>
-					<option value="Örebro universitet">Örebro universitet</option>
+					{universities}
 			    </Input>
 				<Input type="textarea" label="" placeholder="" name="value" value={this.state.value} onChange={this.handleChange}/>
 				<Input type="text" label="Alias" placeholder="alias" id="alias" name="alias" value={this.state.alias} onChange={this.handleChange}/>
@@ -68,7 +59,24 @@ var SendInForm = React.createClass({
 		);
 	}
 });
-
+/*
+<option value="" active>Välj universitet..</option>
+<option value="Chalmers tekniska högskola">Chalmers tekniska högskola</option>
+<option value="Göteborgs universitet">Göteborgs universitet</option>
+<option value="Karlstads universitet">Karlstads universitet</option>
+<option value="Karolinska institutet">Karolinska institutet</option>
+<option value="Kungliga Tekniska högskolan">Kungliga Tekniska högskolan</option>
+<option value="Linköpings universitet">Linköpings universitet</option>
+<option value="Linnéuniversitetet">Linnéuniversitetet</option>
+<option value="Luleå tekniska universitet">Luleå tekniska universitet</option>
+<option value="Lunds universitet">Lunds universitet</option>
+<option value="Mittuniversitetet">Mittuniversitetet</option>
+<option value="Stockholms universitet">Stockholms universitet</option>
+<option value="Sveriges lantbruksuniversitet">Sveriges lantbruksuniversitet</option>
+<option value="Umeå universitet">Umeå universitet</option>
+<option value="Uppsala universitet">Uppsala universitet</option>
+<option value="Örebro universitet">Örebro universitet</option>
+*/
 function confessionToDatabase(text, alias,university){
 	var ref = new Firebase(C.FIREBASE+"/"+C.FIREBASE_PENDING);
 	ref.push({

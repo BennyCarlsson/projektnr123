@@ -1,11 +1,10 @@
 var React = require('react'),
     ReactDOM = require('react-dom'),
     C = require('../constants'),
+    Universities = require("../universities"),
     Firebase = require("firebase"),
     Link = require('react-router').Link,
-    Link = require('react-router').Link,
-    ListGroup = require('react-bootstrap').ListGroup,
-    ListGroupItem = require('react-bootstrap').ListGroupItem;
+    SideMenu = require('./SideMenu');
 
 var Confessions = React.createClass({
     getInitialState: function() {
@@ -49,24 +48,6 @@ var Confessions = React.createClass({
                 <SideMenu changeUniversity={this.changeUniversity}/>
                 <ConfessionsList confessions = {this.state.data}/>
             </div>
-        );
-    }
-});
-var SideMenu = React.createClass({
-    getInitialState: function() {
-        return { activeTabClassName: "all" };
-    },
-    changeUniversity: function(e){
-            this.props.changeUniversity(e);
-            this.setState({activeTabClassName:e});
-    },
-    render : function(){
-        return(
-            <ListGroup>
-                <ListGroupItem href="#" onClick={this.changeUniversity.bind(this,"all")} active={this.state.activeTabClassName === "all"?"active":""} >Alla</ListGroupItem>
-                <ListGroupItem href="#"  onClick={this.changeUniversity.bind(this,"Linnéuniversitetet")} active={this.state.activeTabClassName === "Linnéuniversitetet"?"active":""} >Linnéuniversitetet</ListGroupItem>
-                <ListGroupItem href="#" onClick={this.changeUniversity.bind(this,"Uppsala universitet")} active={this.state.activeTabClassName === "Uppsala universitet"?"active":""} >Uppsala universitet</ListGroupItem>
-            </ListGroup>
         );
     }
 });
