@@ -8,43 +8,53 @@ var React = require('react'),
 	Link = require('react-router').Link,
 	Confession = require('./confessions'),
 	TextField = require('material-ui').TextField,
-	RaisedButton  = require('material-ui').RaisedButton;
+	RaisedButton  = require('material-ui').RaisedButton,
+	Paper = require('material-ui').Paper,
+	style = require('../styles');
 
 var Send = React.createClass({
     render: function(){
         return(
                 <div className="container">
-					<Link to="/" component={Confession}>Bekännelser</Link>
-					<h1>Skicka in</h1>
-					<SendInForm/>
+					<div id="sendInWrapper">
+						<LinkButton/>
+						<h1 id="h1SendIn">Skriv en Bekännelse</h1>
+						<SendInForm/>
+					</div>
 				</div>
         );
     }
 });
+var LinkButton = React.createClass({
+	render: function(){
+		return(
+			<Link to="/" component={Confession}>Läs Bekännelser</Link>
+		);
+	}
+});
 
 var SendInForm = React.createClass({
 	getInitialState: function(){
-		return{value: "",alias: "",university: ""};
+		return{text: "",alias: "",university: ""};
 	},
 	handleChange: function(e){
 		var nextState = {};
 		nextState[e.target.name] = e.target.value;
 		this.setState(nextState);
-
 	},
 	handleSubmit: function(e){
 		e.preventDefault();
-		var value = this.state.value;
+		var text = this.state.text;
 		var alias = this.state.alias.trim();
 		var university = this.state.university.trim();
-		if(!value){
+		if(!text){
 			return;
 		}
 		if(!university){
 			return;
 		}
-		confessionToDatabase(value, alias,university);
-		this.setState({value: ""});
+		confessionToDatabase(text, alias,university);
+		this.setState({text:""});
 	},
 	handleDropDown: function(e,index,value){
 		this.setState({university: value});
@@ -54,33 +64,57 @@ var SendInForm = React.createClass({
 			return <MenuItem key={index} value={university}  primaryText={university}/>;
 		});
 		return(
-			<div>
-			<form id="sendInForm" onSubmit={this.handleSubmit}>
-				<TextField
-			      hintText="Bekännelse.."
-			      multiLine={true}
-			      rows={5}
-			      rowsMax={20}
-				  fullWidth={true}
-				  type="textarea" label="" placeholder="" name="value" value={this.state.value} onChange={this.handleChange}
-			    /><br/>
-			<DropDownMenu name="university" value={this.state.university} onChange={this.handleDropDown}>
-				<MenuItem value={""}  primaryText={"välj universitet"}/>
-					{universities}
-				</DropDownMenu>
-				<TextField
-					hintText="Anonym"
-      				floatingLabelText="Alias"
-					id="alias" name="alias" value={this.state.alias} onChange={this.handleChange}
+			<div id="sendInFormDiv">
+				<Paper zDepth={2} style={style.sendInPapaper}>
+				<form id="sendInForm" onSubmit={this.handleSubmit}>
+					<TextField
+					  hintText="Bekännelse.."
+					  hintStyle={style.sendInHint}
+					  multiLine={true}
+					  rows={5}
+					  rowsMax={20}
+					  fullWidth={true}
+					  type="textarea" label="" placeholder="" name="text" value={this.state.text} onChange={this.handleChange}
 					/>
-				<RaisedButton type="submit" label="Skicka" primary={true} />
-			</form>
+				<div id="sendInFormButtonDiv">
+					<RaisedButton id="sendInFormButton"
+						backgroundColor="#42A5F5" type="submit"
+						label="Skicka"
+						primary={true}
+						/>
+				</div>
+				<div id="bottomSendInForm">
+					<UniversityDropDown university={this.state.university}
+						handleDropDown={this.handleDropDown}
+						universities={universities}/>
+						<TextField
+							id="aliasInputForm"
+							hintText="Anonym"
+							floatingLabelText="Alias"
+							name="alias"
+							value={this.state.alias}
+							onChange={this.handleChange}
+						/>
+				</div>
+				</form>
+			</Paper>
 			</div>
 		);
 	}
 });
+
+var UniversityDropDown = React.createClass({
+	render: function(){
+		return(
+			<DropDownMenu name="university" value={this.props.university} onChange={this.props.handleDropDown}>
+				<MenuItem value={""}  primaryText={"välj universitet"}/>
+				{this.props.universities}
+			</DropDownMenu>
+		);
+	}
+});
+
 function confessionToDatabase(text, alias,university){
-	console.log(text);
 	var ref = new Firebase(C.FIREBASE+"/"+C.FIREBASE_PENDING);
 	ref.push({
 		sentTimeStamp: Firebase.ServerValue.TIMESTAMP,

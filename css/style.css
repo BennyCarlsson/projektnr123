@@ -12,7 +12,7 @@ body{
     z-index: 100;
 }
 #confessionListGridDiv{
-    margin-top: 95px;
+    margin-top: 100px
 }
 #universityListDesktop{
     position: fixed;
@@ -45,9 +45,8 @@ body{
     margin: auto;
     width: 40%;
     min-height: 150px;
-    border-bottom: 1px solid #DCCECE;
+    margin-bottom: 50px;
 }
-
 .cardFooter{
     position: absolute;
     bottom: 0;
@@ -59,6 +58,7 @@ body{
     color: #909090;
     text-align: right;
     padding-left: 5px;
+    margin: 1px;
 }
 .universitySpan{
     padding-right: 10px;
@@ -69,31 +69,64 @@ body{
 }
 .openNewTab{
     position: absolute;
-    top: -24px;
-    right: -12px;
+    top: -14px;
+    right: -11px;
 }
 .sharebuttonsDiv{
     position: absolute;
-    left: 0;
-    bottom: 5px;
+    left: 3px;
+    bottom: 3px;
     z-index: 5;
     width: 45%;
 }
 .facebookShareButton{
-    margin-right: 5px;
+    margin-right: 3px;
 }
 .twitterShareButton{
 
 }
 .whiteIcons{
+
+}
+.facebookIcon{
+    color:#3B5998
+}
+.twitterIcon{
+    color:#00ACED
+}
+.facebookShareButton button:hover i{
+    color: white;
+}
+.twitterShareButton button:hover i{
     color: white;
 }
 .timePost{
     position: absolute;
-top: -17px;
-left: 0;
-font-size: 10px;
-color: #909090;
-text-align: right;
-padding-left: 5px;
+    top: 1px;
+    left: 0;
+    font-size: 10px;
+    color: #909090;
+    text-align: right;
+    padding-left: 5px;
+}
+#sendInWrapper{
+    margin: auto;
+    width: 40%;
+}
+#bottomSendInForm{
+    width: 100%;
+    text-align: right;
+}
+#aliasInputForm{
+    
+}
+#sendInFormButtonDiv{
+    position: absolute;
+    bottom: 0;
+}
+#sendInForm{
+    position: relative;
+}
+#h1SendIn{
+    color: #42A5F5;
 }

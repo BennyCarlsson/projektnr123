@@ -1,3 +1,10 @@
+body{
+    width: 100vw;
+    margin: 0;
+}
+#content{
+    width: 100%;
+}
 .onlyDesktop{
     display: none;
 }
@@ -8,9 +15,29 @@
     display: none;
 }
 .postClass{
-    width: 95%;
+    width:100%;
+    margin-bottom: 30px;
+}
+.cardFooter{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 58%;
 }
 .cardFooter p{
     text-align: left;
     margin: 2px;
+}
+.facebookShareButton button:hover i{
+    color: #3B5998;
+}
+.twitterShareButton button:hover i{
+    color: #00ACED;
+}
+#sendInWrapper{
+    width: 100%;
+}
+#sendInFormButtonDiv{
+    position: absolute;
+    bottom: -84px;
 }
