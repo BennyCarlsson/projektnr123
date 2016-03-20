@@ -7,7 +7,8 @@ var React = require('react'),
 	Router = require('react-router').Router,
 	Route = require('react-router').Route,
  	IndexRoute = require('react-router').IndexRoute,
-	hashHistory = require('react-router').hashHistory;
+	hashHistory = require('react-router').hashHistory,
+	tapEventPlugin = require("react-tap-event-plugin")();
 
 ReactDOM.render(
 		<Router history={hashHistory}>

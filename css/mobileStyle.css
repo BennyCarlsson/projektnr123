@@ -1,0 +1,16 @@
+.onlyDesktop{
+    display: none;
+}
+.onlyMobile{
+    display: initial;
+}
+#sendInLink{
+    display: none;
+}
+.postClass{
+    width: 95%;
+}
+.cardFooter p{
+    text-align: left;
+    margin: 2px;
+}

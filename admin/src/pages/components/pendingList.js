@@ -44,7 +44,7 @@ var ConfessionsList = React.createClass({
     render : function(){
         var confessions = this.props.confessions.map(function(obj,index){
             return <div key={index} className="confessionDiv">
-                        <p> {obj.text}</p>
+                        <p>{obj.text}</p>
 						<p>{obj.university}</p>
                         {obj.alias === "" ? "":<p>-{obj.alias}</p>}
 						<button className="declineButton" onClick={decline.bind(this,obj)}>Neka</button>

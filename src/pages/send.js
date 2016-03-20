@@ -1,17 +1,21 @@
+/*jshint esnext: true */
+import DropDownMenu from 'material-ui/lib/DropDownMenu';
+import MenuItem from 'material-ui/lib/menus/menu-item';
 var React = require('react'),
 	ReactDOM = require('react-dom'),
 	C = require('../constants'),
 	Universities = require("../universities"),
 	Link = require('react-router').Link,
-	Button = require('react-bootstrap').Button,
-	Input = require('react-bootstrap').Input;
+	Confession = require('./confessions'),
+	TextField = require('material-ui').TextField,
+	RaisedButton  = require('material-ui').RaisedButton;
 
 var Send = React.createClass({
     render: function(){
         return(
                 <div className="container">
-					<Link to="/">Bekännelser</Link>
-					<h1>Send</h1>
+					<Link to="/" component={Confession}>Bekännelser</Link>
+					<h1>Skicka in</h1>
 					<SendInForm/>
 				</div>
         );
@@ -20,16 +24,17 @@ var Send = React.createClass({
 
 var SendInForm = React.createClass({
 	getInitialState: function(){
-		return{value: "Hello",alias: "anonym",university: ""};
+		return{value: "",alias: "",university: ""};
 	},
 	handleChange: function(e){
 		var nextState = {};
 		nextState[e.target.name] = e.target.value;
 		this.setState(nextState);
+
 	},
 	handleSubmit: function(e){
 		e.preventDefault();
-		var value = this.state.value.trim();
+		var value = this.state.value;
 		var alias = this.state.alias.trim();
 		var university = this.state.university.trim();
 		if(!value){
@@ -41,43 +46,41 @@ var SendInForm = React.createClass({
 		confessionToDatabase(value, alias,university);
 		this.setState({value: ""});
 	},
+	handleDropDown: function(e,index,value){
+		this.setState({university: value});
+	},
 	render: function(){
-		var universities = Universities.universities.map(function(university){
-			return <option value={university}>{university}</option>;
-
+		var universities = Universities.universities.map(function(university,index){
+			return <MenuItem key={index} value={university}  primaryText={university}/>;
 		});
 		return(
+			<div>
 			<form id="sendInForm" onSubmit={this.handleSubmit}>
-				<Input type="select" placeholder="Välj universitet.." name="university" value={this.state.university}  onChange={this.handleChange}>
-					<option value="" active>Välj universitet..</option>
+				<TextField
+			      hintText="Bekännelse.."
+			      multiLine={true}
+			      rows={5}
+			      rowsMax={20}
+				  fullWidth={true}
+				  type="textarea" label="" placeholder="" name="value" value={this.state.value} onChange={this.handleChange}
+			    /><br/>
+			<DropDownMenu name="university" value={this.state.university} onChange={this.handleDropDown}>
+				<MenuItem value={""}  primaryText={"välj universitet"}/>
 					{universities}
-			    </Input>
-				<Input type="textarea" label="" placeholder="" name="value" value={this.state.value} onChange={this.handleChange}/>
-				<Input type="text" label="Alias" placeholder="alias" id="alias" name="alias" value={this.state.alias} onChange={this.handleChange}/>
-				<Button type="submit" className="btn btn-success">Skicka</Button>
+				</DropDownMenu>
+				<TextField
+					hintText="Anonym"
+      				floatingLabelText="Alias"
+					id="alias" name="alias" value={this.state.alias} onChange={this.handleChange}
+					/>
+				<RaisedButton type="submit" label="Skicka" primary={true} />
 			</form>
+			</div>
 		);
 	}
 });
-/*
-<option value="" active>Välj universitet..</option>
-<option value="Chalmers tekniska högskola">Chalmers tekniska högskola</option>
-<option value="Göteborgs universitet">Göteborgs universitet</option>
-<option value="Karlstads universitet">Karlstads universitet</option>
-<option value="Karolinska institutet">Karolinska institutet</option>
-<option value="Kungliga Tekniska högskolan">Kungliga Tekniska högskolan</option>
-<option value="Linköpings universitet">Linköpings universitet</option>
-<option value="Linnéuniversitetet">Linnéuniversitetet</option>
-<option value="Luleå tekniska universitet">Luleå tekniska universitet</option>
-<option value="Lunds universitet">Lunds universitet</option>
-<option value="Mittuniversitetet">Mittuniversitetet</option>
-<option value="Stockholms universitet">Stockholms universitet</option>
-<option value="Sveriges lantbruksuniversitet">Sveriges lantbruksuniversitet</option>
-<option value="Umeå universitet">Umeå universitet</option>
-<option value="Uppsala universitet">Uppsala universitet</option>
-<option value="Örebro universitet">Örebro universitet</option>
-*/
 function confessionToDatabase(text, alias,university){
+	console.log(text);
 	var ref = new Firebase(C.FIREBASE+"/"+C.FIREBASE_PENDING);
 	ref.push({
 		sentTimeStamp: Firebase.ServerValue.TIMESTAMP,
