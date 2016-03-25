@@ -1,5 +1,6 @@
 body{
     font-family: 'Roboto', sans-serif;
+    background-color: #F7F4F4;
 }
 .onlyMobile{
     display: none;
@@ -28,8 +29,8 @@ body{
 }
 #sendInLink{
     position: fixed;
-    position: fixed;
-    right: 1%;
+    width: 25%;
+    right: 0;
     bottom: 2%;
 }
 #sendInLink a{
@@ -112,13 +113,14 @@ body{
 #sendInWrapper{
     margin: auto;
     width: 40%;
+    margin-top: 80px;
 }
 #bottomSendInForm{
     width: 100%;
     text-align: right;
 }
 #aliasInputForm{
-    
+
 }
 #sendInFormButtonDiv{
     position: absolute;
@@ -129,4 +131,37 @@ body{
 }
 #h1SendIn{
     color: #42A5F5;
+}
+#onePostWrapper{
+    margin-top: 80px;
+}
+.posttextpNotFound{
+    font-style: italic;
+}
+#facebookLikeButtonDiv{
+    position: fixed;
+    top: 100px;
+    right: 0;
+    width: 25%;
+}
+/*
+-----BetaThings
+*/
+#betaDiv{
+transform: rotate(47deg);
+z-index: 1000;
+background-color: #26A69A;
+width: 178px;
+height: 38px;
+position: fixed;
+top: 6px;
+right: -55px;
+text-align: center;
+}
+#betaP{
+color: white;
+font-size: 28px;
+position: fixed;
+top: -26px;
+right: 47px;
 }

@@ -10,27 +10,22 @@ var React = require('react'),
 	TextField = require('material-ui').TextField,
 	RaisedButton  = require('material-ui').RaisedButton,
 	Paper = require('material-ui').Paper,
-	style = require('../styles');
+	style = require('../styles'),
+	AppBarHome = require("./components/appBarHome"),
+	MetaOgTags = require("./components/metaOgTags");
 
 var Send = React.createClass({
     render: function(){
         return(
                 <div className="container">
+					<AppBarHome/>
 					<div id="sendInWrapper">
-						<LinkButton/>
 						<h1 id="h1SendIn">Skriv en Bekännelse</h1>
 						<SendInForm/>
 					</div>
 				</div>
         );
     }
-});
-var LinkButton = React.createClass({
-	render: function(){
-		return(
-			<Link to="/" component={Confession}>Läs Bekännelser</Link>
-		);
-	}
 });
 
 var SendInForm = React.createClass({
@@ -65,7 +60,8 @@ var SendInForm = React.createClass({
 		});
 		return(
 			<div id="sendInFormDiv">
-				<Paper zDepth={2} style={style.sendInPapaper}>
+				<MetaOgTags url={"http://studentensbekännelser/#/send"} description={"Skriv och skicka in din egna bekännelse"} title={"Studentens Bekännelser"}/>
+				<Paper zDepth={1} style={style.sendInPapaper}>
 				<form id="sendInForm" onSubmit={this.handleSubmit}>
 					<TextField
 					  hintText="Bekännelse.."

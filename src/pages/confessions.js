@@ -13,7 +13,8 @@ var React = require('react'),
     SideMenu = require('./components/SideMenu'),
     style = require('../styles'),
     timeConverter = require("./components/timeConverter"),
-    ConfessionsList = require("./components/confessionsList");
+    ConfessionsList = require("./components/confessionsList"),
+    MetaOgTags = require("./components/metaOgTags");
 
 var Confessions = React.createClass({
     getInitialState: function() {
@@ -70,6 +71,7 @@ var Confessions = React.createClass({
     render : function(){
         return(
             <div className="confessions">
+                <MetaOgTags url={"http://studentensbekännelser.se"} description={"Läs studenters bekännelser från alla universitet"} title={"Studentens Bekännelser"}/>
                 <div id="sideMenuDesktopDiv">
                     <SideMenu changeUniversity={this.changeUniversity}/>
                 </div>
@@ -79,6 +81,7 @@ var Confessions = React.createClass({
                 <div id="sendInLink">
                     <SendInLink/>
                 </div>
+                <FacebookLike/>
             </div>
         );
     }
@@ -93,6 +96,23 @@ var SendInLink = React.createClass({
                     labelPosition={"before"}
                  />
             </Link>
+        );
+    }
+});
+
+var FacebookLike = React.createClass({
+    render: function(){
+        return(
+            <div id="facebookLikeButtonDiv" className="onlyDesktop">
+                <div className="fb-page" data-href="https://www.facebook.com/hellokitty/"
+                    data-tabs="" data-small-header="true"
+                    data-adapt-container-width="false" data-hide-cover="true"
+                    data-show-facepile="true" data-width="500">
+                    <div className="fb-xfbml-parse-ignore">
+                        <blockquote cite="https://www.facebook.com/hellokitty/">
+                            <a href="https://www.facebook.com/hellokitty/">Hello Kitty</a>
+                        </blockquote></div></div>
+            </div>
         );
     }
 });

@@ -6,7 +6,9 @@ var React = require('react'),
     Link = require('react-router').Link,
     style = require('../../styles'),
     timeConverter = require("./timeConverter"),
-    Paper = require('material-ui').Paper;
+    Paper = require('material-ui').Paper,
+    ShareButtons = require('./shareButtons'),
+    CardFooter = require('./cardFooter');
 
 var ConfessionsList = React.createClass({
     render : function(){
@@ -18,12 +20,11 @@ var ConfessionsList = React.createClass({
                     <article>
                         <div className="postClass">
                             <Paper zDepth={1} style={style.sendInPapaper}>
-                            <span className="timePost">{time}</span>
-                            <OpenNewTabIconButton key={obj.key}/>
-                            <p className="openNewTab"></p>
-                            <p className="posttextp">{obj.text}</p>
-                            <ShareButtons facebookShareUrl={facebookShareUrl} twitterShareUrl={twitterShareUrl}/>
-                            <CardFooter university={obj.university}alias={obj.alias}/>
+                                <span className="timePost">{time}</span>
+                                <OpenNewTabIconButton cannotBeNamedKey={obj.key}/>
+                                <p className="posttextp">{obj.text}</p>
+                                <ShareButtons facebookShareUrl={facebookShareUrl} twitterShareUrl={twitterShareUrl}/>
+                                <CardFooter university={obj.university}alias={obj.alias}/>
                             </Paper>
                         </div>
                     </article>
@@ -40,7 +41,7 @@ var OpenNewTabIconButton = React.createClass({
     render: function(){
         return(
             <div className="openNewTab onlyDesktop">
-                <Link to={"post?key="+this.props.key} target="_blank">
+                <Link to={"post?key="+this.props.cannotBeNamedKey} target="_blank">
                 <IconButton
                     iconStyle={style.iconNewTab}
                   iconClassName="material-icons"
@@ -48,64 +49,6 @@ var OpenNewTabIconButton = React.createClass({
                  open_in_new
                 </IconButton>
                 </Link>
-            </div>
-        );
-    }
-});
-var ShareButtons = React.createClass({
-        render: function(){
-            return(
-                <div className="sharebuttonsDiv">
-                    <a href={this.props.facebookShareUrl} target="_blank">
-                        <span className="facebookShareButton onlyDesktop">
-                            <FlatButton
-                              label=" "
-                              hoverColor="#3B5998"
-                              style={style.facebookShareButtonDesktop}
-                              secondary={true}
-                              icon={<i className="fa fa-facebook whiteIcons facebookIcon"></i>}
-                            />
-                        </span>
-                        <span className="facebookShareButton onlyMobile">
-                            <FlatButton
-                              label=" "
-                              style={style.facebookShareButtonMobile}
-                              secondary={true}
-                              icon={<i className="fa fa-facebook whiteIcons facebookIcon"></i>}
-                            />
-                        </span>
-                    </a>
-                    <a href={this.props.twitterShareUrl} target="_blank">
-                        <span className="twitterShareButton onlyDesktop twitterIcon">
-                            <FlatButton
-                              label=" "
-                              hoverColor="#00ACED"
-                              style={style.twitterShareButtonDesktop}
-                              secondary={true}
-                              icon={<i className="fa fa-twitter whiteIcons twitterIcon"></i>}
-                            />
-                        </span>
-                        <span className="twitterShareButton onlyMobile">
-                            <FlatButton
-                              label=" "
-                              style={style.twitterShareButtonMobile}
-                              secondary={true}
-                              icon={<i className="fa fa-twitter whiteIcons"></i>}
-                            />
-                        </span>
-                    </a>
-                </div>
-            );
-        }
-});
-var CardFooter = React.createClass({
-    render: function(){
-        return(
-            <div className="cardFooter">
-                <p className="cardFooterP">
-                    <span className="universitySpan">{this.props.university}</span>
-                    <span className="aliasSpan">{"-"+this.props.alias}</span>
-                </p>
             </div>
         );
     }
