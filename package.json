@@ -10,6 +10,7 @@
     "react-document-meta": "^2.0.2",
     "react-dom": "^0.14.0-rc1",
     "react-redux": "=4.0.0",
+    "react-router": "^2.0.1",
     "react-tap-event-plugin": "^0.2.2",
     "redux-thunk": "=1.0.0",
     "watchify": "^3.4.0"

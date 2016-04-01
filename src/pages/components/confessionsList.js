@@ -14,8 +14,8 @@ var ConfessionsList = React.createClass({
     render : function(){
         var confessions = this.props.confessions.map(function(obj,index){
             var time = timeConverter(new Date(),new Date(obj.processedTimeStamp));
-            var facebookShareUrl= "http://www.facebook.com/sharer.php?u=https://studentensbekännelse.com/#/post?key="+obj.key;
-            var twitterShareUrl= "https://twitter.com/share?url=https://studentensbekännelse.com/%23/"+obj.key+"&amp;hashtags=studentensbekännelse";
+            var facebookShareUrl= "http://www.facebook.com/sharer.php?u=http://studentensbekännelser.se/post/?key="+obj.key;
+            var twitterShareUrl= "https://twitter.com/share?url=http://studentensbekännelser.se/post/?key="+obj.key+"&amp;hashtags=studentensbekännelse";
             return <div key={index} className="confessionDiv">
                     <article>
                         <div className="postClass">

@@ -16,11 +16,11 @@ var MetaTag = React.createClass({
 		      }
 		    };
 		return(
-			<div>
-        <DocumentMeta {...meta}/>
-      </div>
+		<div>
+
+      	</div>
 		);
 	}
 });
-
+//<DocumentMeta {...meta}/>
 module.exports = MetaTag;

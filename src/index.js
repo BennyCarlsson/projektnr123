@@ -7,11 +7,11 @@ var React = require('react'),
 	Router = require('react-router').Router,
 	Route = require('react-router').Route,
  	IndexRoute = require('react-router').IndexRoute,
-	hashHistory = require('react-router').hashHistory,
+	browserHistory = require('react-router').browserHistory,
 	tapEventPlugin = require("react-tap-event-plugin")();
 
 ReactDOM.render(
-		<Router history={hashHistory}>
+		<Router history={browserHistory}>
 			<Route path="/" component={Wrapper}>
 				<IndexRoute component={Confession}></IndexRoute>
 				<Route path="send" component={Send}></Route>

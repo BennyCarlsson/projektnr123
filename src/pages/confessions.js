@@ -89,7 +89,7 @@ var Confessions = React.createClass({
 var SendInLink = React.createClass({
     render: function(){
         return(
-            <Link to="send" target="_blank">
+            <Link to="/send" target="_blank">
                 <FlatButton label="Skriv en bekännelse"
                     labelStyle={style.sendIn}
                     icon={<PostIcon id="sendInIcon"/>}
@@ -107,7 +107,7 @@ var FacebookLike = React.createClass({
                 <div className="fb-page" data-href="https://www.facebook.com/hellokitty/"
                     data-tabs="" data-small-header="true"
                     data-adapt-container-width="false" data-hide-cover="true"
-                    data-show-facepile="true" data-width="500">
+                    data-show-facepile="true" data-width="400">
                     <div className="fb-xfbml-parse-ignore">
                         <blockquote cite="https://www.facebook.com/hellokitty/">
                             <a href="https://www.facebook.com/hellokitty/">Hello Kitty</a>

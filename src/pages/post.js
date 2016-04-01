@@ -21,7 +21,12 @@ var Post = React.createClass({
 		var key = url.split('key=')[1].split('&')[0];
         var ref = new Firebase(C.FIREBASE+"/"+C.FIREBASE_ACCEPTED+"/"+key);
         ref.once("value", function(snap){
-			this.setState({obj: snap.val(), notLoaded:false});
+			var confession = snap.val();
+			if(confession !== null){
+				confession.key = snap.key();
+			}
+			console.log(confession);
+			this.setState({obj: confession, notLoaded:false});
         }.bind(this));
     },
     render: function(){
@@ -34,8 +39,9 @@ var Post = React.createClass({
 				return <NoArticleFound/>;
 			}
 			var time = timeConverter(new Date(),new Date(this.state.obj.processedTimeStamp));
-			var facebookShareUrl= "http://www.facebook.com/sharer.php?u=https://studentensbekännelse.com/#/post?key="+this.state.obj.key;
-			var twitterShareUrl= "https://twitter.com/share?url=https://studentensbekännelse.com/%23/"+this.state.obj.key+"&amp;hashtags=studentensbekännelse";
+			console.log(this.state.obj);
+			var facebookShareUrl= "http://www.facebook.com/sharer.php?u=http://studentensbekännelser.se/post/?key="+this.state.obj.key;
+			var twitterShareUrl= "https://twitter.com/share?url=http://studentensbekännelser.se/post/?key="+this.state.obj.key+"&amp;hashtags=studentensbekännelse";
 			return		<div>
 							<article>
 								<div className="postClass">
@@ -50,10 +56,10 @@ var Post = React.createClass({
 							</article>
 						</div>;
 			}.bind(this);
-
+			//<MetaOgTags url={window.location.href} description={this.state.obj.text} title={"Studentens Bekännelser"}/>
 		return(
 			<div className="container">
-				<MetaOgTags url={window.location.href} description={this.state.obj.text} title={"Studentens Bekännelser"}/>
+
 				<AppBarHome/>
 				<div id="onePostWrapper">
 					{html()}
